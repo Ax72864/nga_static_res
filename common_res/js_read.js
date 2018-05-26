@@ -176,6 +176,29 @@ $(a.pInfoC)._.add(
 		)
 	)._.css('lineHeight','inherit')
 
+	//Courtesy of https://github.com/icyblade
+	if (a.__GP.admincheck && a.pInfoC) {
+		var opt = [[105, '515'], [60, '131'], [30, '35'], [15, '19']]
+		var buttons = a.pInfoC.getElementsByTagName('nobr')[0];
+		for (var i in opt) {
+			buttons.insertBefore(generate_template(a.pid, opt[i]), buttons.firstElementChild)
+		}
+
+		function generate_template(pid, score) {
+			var template = buttons.children[0].cloneNode(true);
+			template.firstElementChild.firstElementChild.innerHTML = '+' + score[0];
+			template.firstElementChild.firstElementChild.title = '加' + score[0] + '声望'
+			template.onclick = function () {
+				if (confirm('要同时增加威望与G吗?')) {
+					__NUKE.doRequest({ u: { u: __API._base, a: { __lib: 'add_point_v3', __act: 'add', opt: score[1], fid: __CURRENT_FID, tid: __CURRENT_TID, pid: pid, info: '', value: '', raw: 3 } }, b: undefined, })
+				} else {
+					__NUKE.doRequest({ u: { u: __API._base, a: { __lib: 'add_point_v3', __act: 'add', opt: score[1] - 3, fid: __CURRENT_FID, tid: __CURRENT_TID, pid: pid, info: '', value: '', raw: 3 } }, b: undefined, })
+				}
+			}
+			return template;
+		}
+	}
+
 if(a.atItem){
 
 	a.pInfoC.parentNode.insertBefore($('/div').$0(
