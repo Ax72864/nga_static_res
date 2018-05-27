@@ -2906,8 +2906,8 @@ o.appendChild(_$('<table/>')._.cls('headline')._.aC(_$('<tbody/>')._.aC(tr)))
 ubbcode.writelink=function(u,n)
 {
 var v = this.urlToAry(u)
-
-var h = " onmouseover='this.childNodes[0].style.display=\"inline\"' onmouseout='this.childNodes[0].style.display=\"none\"'>"+v.hintHTML;
+var h = " >" + v.hintHTML;
+//var h = " onmouseover='this.childNodes[0].style.display=\"inline\"' onmouseout='this.childNodes[0].style.display=\"none\"'>"+v.hintHTML;
 
 if (v.check<2)
 	h = " onclick='this.previousSibling.style.display=\"inline\";commonui.cancelEvent(event);commonui.cancelBubble(event);return false' "+h;
